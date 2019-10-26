@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
+    "format": "prettier --write"
     "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
@@ -17,5 +18,8 @@
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "session-file-store": "^1.0.0"
+  },
+  "devDependencies": {
+    "prettier": "1.18.2"
   }
 }
