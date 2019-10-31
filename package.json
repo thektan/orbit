@@ -8,7 +8,11 @@
     "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
+    "@chakra-ui/core": "^0.4.1",
+    "@emotion/core": "^10.0.22",
+    "@emotion/styled": "^10.0.23",
     "body-parser": "^1.17.1",
+    "emotion-theming": "^10.0.19",
     "express": "^4.14.0",
     "express-session": "^1.15.2",
     "firebase": "^5.6.0",
