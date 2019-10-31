@@ -15,13 +15,13 @@ import {
 
 interface IndexProps {
   messages: any;
-  user: any;
+  user: firebase.User;
 }
 
 interface IndexState {
   messages: any;
   unsubscribe: any;
-  user: any;
+  user: firebase.User;
   value: string;
 }
 
