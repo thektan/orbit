@@ -1,26 +1,39 @@
-import React, { Component } from "react";
-import firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/firestore";
-import "isomorphic-unfetch";
-import clientCredentials from "../../credentials/client";
+import React, {Component} from 'react';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
+import 'isomorphic-unfetch';
+import clientCredentials from '../../credentials/client';
 
-export default class Index extends Component {
-  static async getInitialProps({ req, query }) {
+interface IndexProps {
+  messages: any;
+  user: any;
+}
+
+interface IndexState {
+  messages: any;
+  unsubscribe: any;
+  user: any;
+  value: string;
+}
+
+export default class Index extends Component<IndexProps, IndexState> {
+  static async getInitialProps({req, query}) {
     const user = req && req.session ? req.session.decodedToken : null;
     // don't fetch anything from firebase if the user is not found
     // const snap = user && await req.firebaseServer.database().ref('messages').once('value')
     // const messages = snap && snap.val()
     const messages = null;
-    return { user, messages };
+    return {user, messages};
   }
 
   constructor(props) {
     super(props);
     this.state = {
       user: this.props.user,
-      value: "",
-      messages: this.props.messages
+      value: '',
+      messages: this.props.messages,
+      unsubscribe: null,
     };
 
     this.addDbListener = this.addDbListener.bind(this);
@@ -36,26 +49,26 @@ export default class Index extends Component {
 
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.setState({ user: user });
+        this.setState({user: user});
         return user
           .getIdToken()
           .then(token => {
             // eslint-disable-next-line no-undef
-            return fetch("/api/login", {
-              method: "POST",
+            return fetch('/api/login', {
+              method: 'POST',
               // eslint-disable-next-line no-undef
-              headers: new Headers({ "Content-Type": "application/json" }),
-              credentials: "same-origin",
-              body: JSON.stringify({ token })
+              headers: new Headers({'Content-Type': 'application/json'}),
+              credentials: 'same-origin',
+              body: JSON.stringify({token}),
             });
           })
           .then(res => this.addDbListener());
       } else {
-        this.setState({ user: null });
+        this.setState({user: null});
         // eslint-disable-next-line no-undef
-        fetch("/api/logout", {
-          method: "POST",
-          credentials: "same-origin"
+        fetch('/api/logout', {
+          method: 'POST',
+          credentials: 'same-origin',
         }).then(() => this.removeDbListener());
       }
     });
@@ -63,19 +76,19 @@ export default class Index extends Component {
 
   addDbListener() {
     var db = firebase.firestore();
-    let unsubscribe = db.collection("messages").onSnapshot(
+    let unsubscribe = db.collection('messages').onSnapshot(
       querySnapshot => {
         var messages = {};
         querySnapshot.forEach(function(doc) {
           messages[doc.id] = doc.data();
         });
-        if (messages) this.setState({ messages });
+        if (messages) this.setState({messages});
       },
       error => {
         console.error(error);
-      }
+      },
     );
-    this.setState({ unsubscribe });
+    this.setState({unsubscribe});
   }
 
   removeDbListener() {
@@ -86,20 +99,20 @@ export default class Index extends Component {
   }
 
   handleChange(event) {
-    this.setState({ value: event.target.value });
+    this.setState({value: event.target.value});
   }
 
   handleSubmit(event) {
     event.preventDefault();
     var db = firebase.firestore();
     const date = new Date().getTime();
-    db.collection("messages")
+    db.collection('messages')
       .doc(`${date}`)
       .set({
         id: date,
-        text: this.state.value
+        text: this.state.value,
       });
-    this.setState({ value: "" });
+    this.setState({value: ''});
   }
 
   handleLogin() {
@@ -111,7 +124,7 @@ export default class Index extends Component {
   }
 
   render() {
-    const { user, value, messages } = this.state;
+    const {user, value, messages} = this.state;
 
     return (
       <div>
@@ -124,9 +137,9 @@ export default class Index extends Component {
           <div>
             <form onSubmit={this.handleSubmit}>
               <input
-                type={"text"}
+                type={'text'}
                 onChange={this.handleChange}
-                placeholder={"add message..."}
+                placeholder={'add message...'}
                 value={value}
               />
             </form>
