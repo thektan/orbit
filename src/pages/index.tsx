@@ -4,6 +4,14 @@ import "firebase/auth";
 import "firebase/firestore";
 import "isomorphic-unfetch";
 import clientCredentials from "../../credentials/client";
+import {
+  Button,
+  Input,
+  List,
+  ListItem,
+  ListIcon,
+  ThemeProvider
+} from "@chakra-ui/core";
 
 interface IndexProps {
   messages: any;
@@ -127,31 +135,43 @@ export default class Index extends Component<IndexProps, IndexState> {
     const { user, value, messages } = this.state;
 
     return (
-      <div>
-        {user ? (
-          <button onClick={this.handleLogout}>Logout</button>
-        ) : (
-          <button onClick={this.handleLogin}>Login</button>
-        )}
-        {user && (
-          <div>
-            <form onSubmit={this.handleSubmit}>
-              <input
-                type={"text"}
-                onChange={this.handleChange}
-                placeholder={"add message..."}
-                value={value}
-              />
-            </form>
-            <ul>
-              {messages &&
-                Object.keys(messages).map(key => (
-                  <li key={key}>{messages[key].text}</li>
-                ))}
-            </ul>
-          </div>
-        )}
-      </div>
+      <ThemeProvider>
+        <div>
+          {user ? (
+            <Button onClick={this.handleLogout} variantColor={"blue"}>
+              {"Logout"}
+            </Button>
+          ) : (
+            <Button onClick={this.handleLogin} variantColor={"blue"}>
+              {"Login"}
+            </Button>
+          )}
+          {user && (
+            <div>
+              <form onSubmit={this.handleSubmit}>
+                <Input
+                  isFullWidth={false}
+                  type={"text"}
+                  onChange={this.handleChange}
+                  placeholder={"add message..."}
+                  size={"sm"}
+                  value={value}
+                />
+              </form>
+              <List spacing={2}>
+                {messages &&
+                  Object.keys(messages).map(key => (
+                    <ListItem key={key}>
+                      <ListIcon color={"green.500"} icon={"check-circle"} />
+
+                      {messages[key].text}
+                    </ListItem>
+                  ))}
+              </List>
+            </div>
+          )}
+        </div>
+      </ThemeProvider>
     );
   }
 }
