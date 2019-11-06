@@ -6,6 +6,7 @@ import "isomorphic-unfetch";
 import clientCredentials from "../../credentials/client";
 import {
   Button,
+  CSSReset,
   Input,
   List,
   ListItem,
@@ -136,6 +137,8 @@ export default class Index extends Component<IndexProps, IndexState> {
 
     return (
       <ThemeProvider>
+        <CSSReset />
+
         <div>
           {user ? (
             <Button onClick={this.handleLogout} variantColor={"blue"}>
@@ -163,7 +166,6 @@ export default class Index extends Component<IndexProps, IndexState> {
                   Object.keys(messages).map(key => (
                     <ListItem key={key}>
                       <ListIcon color={"green.500"} icon={"check-circle"} />
-
                       {messages[key].text}
                     </ListItem>
                   ))}
