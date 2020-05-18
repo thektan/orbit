@@ -1,6 +1,6 @@
 {
   "projects": {
-    "staging": "emails-show-8eb6f",
-    "production": "emails-show-prod"
+    "staging": "orbit-staging-dd346",
+    "production": "orbit-production-32e6c"
   }
 }
