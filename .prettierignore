@@ -1,0 +1,8 @@
+.next/
+.vercel/
+
+build/
+lib/
+
+**/*.js.map
+**/package-lock.json

@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "NODE_ENV=development next dev",
     "build": "NODE_ENV=production next build",
-    "start": "NODE_ENV=production next start"
+    "start": "NODE_ENV=production next start",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
@@ -26,6 +27,7 @@
     "@types/lodash.set": "^4.3.6",
     "@types/react": "^16.9.19",
     "autoprefixer": "^9.7.4",
+    "prettier": "2.0.5",
     "tailwindcss": "^1.2.0",
     "typescript": "^3.7.5"
   }
