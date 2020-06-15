@@ -61,11 +61,11 @@ const Account = (props: any) => {
   );
 };
 
-Account.getInitialProps = async function() {
+Account.getInitialProps = async function () {
   const getEnvironment = firebase.functions().httpsCallable("getEnvironment");
   const result = await getEnvironment({});
   return {
-    environment: result.data.environment
+    environment: result.data.environment,
   };
 };
 

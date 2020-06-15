@@ -19,7 +19,7 @@ function Signup() {
   const initialValues: Inputs = {
     email: "",
     password: "",
-    displayName: ""
+    displayName: "",
   };
   var firstInput: HTMLInputElement | null = null;
 
@@ -28,11 +28,13 @@ function Signup() {
   const handleSubmit = async (e: React.ChangeEvent<any>) => {
     e.preventDefault();
     try {
-      await firebase.auth().createUserWithEmailAndPassword(inputs.email, inputs.password);
+      await firebase
+        .auth()
+        .createUserWithEmailAndPassword(inputs.email, inputs.password);
       var user = firebase.auth().currentUser;
       if (user) {
         await user.updateProfile({
-          displayName: inputs.displayName
+          displayName: inputs.displayName,
         });
       }
       Router.push("/");
@@ -45,7 +47,7 @@ function Signup() {
     e.persist();
     setInputs({
       ...inputs,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -64,7 +66,7 @@ function Signup() {
             name="email"
             onChange={handleInputChange}
             value={inputs.email}
-            ref={r => (firstInput = r)}
+            ref={(r) => (firstInput = r)}
           />
         </p>
         <p>

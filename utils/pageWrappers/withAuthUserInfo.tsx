@@ -11,7 +11,7 @@ export default (ComposedComponent: any) => {
     const { AuthUserInfo: AuthUserInfoFromSession, ...otherProps } = props;
     return (
       <AuthUserInfoContext.Consumer>
-        {AuthUserInfo => (
+        {(AuthUserInfo) => (
           <ComposedComponent
             {...otherProps}
             AuthUserInfo={AuthUserInfo || AuthUserInfoFromSession}
@@ -32,7 +32,7 @@ export default (ComposedComponent: any) => {
 
     return {
       ...composedInitialProps,
-      AuthUserInfo
+      AuthUserInfo,
     };
   };
 
@@ -43,10 +43,10 @@ export default (ComposedComponent: any) => {
       AuthUser: PropTypes.shape({
         id: PropTypes.string.isRequired,
         email: PropTypes.string.isRequired,
-        emailVerified: PropTypes.bool.isRequired
+        emailVerified: PropTypes.bool.isRequired,
       }),
-      token: PropTypes.string
-    })
+      token: PropTypes.string,
+    }),
   };
 
   WithAuthUserInfoComp.defaultProps = {};

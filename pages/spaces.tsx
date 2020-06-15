@@ -33,14 +33,14 @@ const Spaces = (props: any) => {
     loadingMoreError,
     hasMore,
     items,
-    loadMore
+    loadMore,
   } = usePagination(
     db
       .collection("spaces")
       .where("uid", "==", authUser?.id || "")
       .orderBy("spaceId", "asc"),
     {
-      limit: 10
+      limit: 10,
     }
   );
 
@@ -57,10 +57,14 @@ const Spaces = (props: any) => {
           </Link>
           <div>
             {loading && <div>...</div>}
-            {items.map(item => (
-              <pre className="text-xs">{JSON.stringify(item.data() || {}, null, 2)}</pre>
+            {items.map((item) => (
+              <pre className="text-xs">
+                {JSON.stringify(item.data() || {}, null, 2)}
+              </pre>
             ))}
-            {hasMore && !loadingMore && <button onClick={loadMore}>[ more ]</button>}
+            {hasMore && !loadingMore && (
+              <button onClick={loadMore}>[ more ]</button>
+            )}
           </div>
           <Footer />
         </>
@@ -74,14 +78,14 @@ Spaces.propTypes = {
     AuthUser: PropTypes.shape({
       id: PropTypes.string.isRequired,
       email: PropTypes.string.isRequired,
-      emailVerified: PropTypes.bool.isRequired
+      emailVerified: PropTypes.bool.isRequired,
     }),
-    token: PropTypes.string
-  })
+    token: PropTypes.string,
+  }),
 };
 
 Spaces.defaultProps = {
-  AuthUserInfo: null
+  AuthUserInfo: null,
 };
 
 export default withAuthUser(withAuthUserInfo(Spaces));

@@ -18,12 +18,15 @@ export const addSession = (req: any, res: any) => {
     // https://github.com/expressjs/cookie-session#cookie-options
     maxAge: 604800000, // week
     httpOnly: true,
-    overwrite: true
+    overwrite: true,
   });
   includeSession(req, res, () => {});
 };
 
-export default (handler: any) => (req: NextApiRequest, res: NextApiResponse) => {
+export default (handler: any) => (
+  req: NextApiRequest,
+  res: NextApiResponse
+) => {
   try {
     addSession(req, res);
   } catch (e) {

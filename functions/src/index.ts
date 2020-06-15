@@ -13,7 +13,7 @@ if (environment === "staging") {
 }
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  storageBucket: storageBucket
+  storageBucket: storageBucket,
 });
 
 export const getEnvironment = functions.https.onCall(async (data, context) => {

@@ -25,7 +25,7 @@ const SpacesCreate = (props: any) => {
 
   const initial: Inputs = {
     spaceId: "",
-    title: ""
+    title: "",
   };
 
   const [inputs, setInputs] = useState(initial);
@@ -51,7 +51,7 @@ const SpacesCreate = (props: any) => {
       await ref.set({
         spaceId: inputs.spaceId,
         title: inputs.title,
-        uid: authUser.id
+        uid: authUser.id,
       });
       Router.push("/spaces");
     } catch (error) {
@@ -63,7 +63,7 @@ const SpacesCreate = (props: any) => {
     e.persist();
     setInputs({
       ...inputs,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -92,7 +92,7 @@ const SpacesCreate = (props: any) => {
                 name="spaceId"
                 onChange={handleInputChange}
                 value={inputs.spaceId}
-                ref={r => (firstInput = r)}
+                ref={(r) => (firstInput = r)}
               />
             </p>
             <p>
@@ -126,14 +126,14 @@ SpacesCreate.propTypes = {
     AuthUser: PropTypes.shape({
       id: PropTypes.string.isRequired,
       email: PropTypes.string.isRequired,
-      emailVerified: PropTypes.bool.isRequired
+      emailVerified: PropTypes.bool.isRequired,
     }),
-    token: PropTypes.string
-  })
+    token: PropTypes.string,
+  }),
 };
 
 SpacesCreate.defaultProps = {
-  AuthUserInfo: null
+  AuthUserInfo: null,
 };
 
 // Use `withAuthUser` to get the authed user server-side, which

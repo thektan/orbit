@@ -42,7 +42,7 @@ export default (ComposedComponent: any) => {
       addSession(req, res);
       AuthUserInfo = createAuthUserInfo({
         firebaseUser: get(req, "session.decodedToken", null),
-        token: get(req, "session.token", null)
+        token: get(req, "session.token", null),
       });
     } else {
       // If client-side, get AuthUserInfo from stored data. We store it
@@ -51,7 +51,8 @@ export default (ComposedComponent: any) => {
       try {
         let jsonData = null;
         const document = window?.document;
-        const textContent = document?.getElementById("__MY_AUTH_USER_INFO")?.textContent;
+        const textContent = document?.getElementById("__MY_AUTH_USER_INFO")
+          ?.textContent;
         if (textContent) {
           jsonData = JSON.parse(textContent);
         }
@@ -79,7 +80,7 @@ export default (ComposedComponent: any) => {
 
     return {
       ...composedInitialProps,
-      AuthUserInfo
+      AuthUserInfo,
     };
   };
 
@@ -90,10 +91,10 @@ export default (ComposedComponent: any) => {
       AuthUser: PropTypes.shape({
         id: PropTypes.string.isRequired,
         email: PropTypes.string.isRequired,
-        emailVerified: PropTypes.bool.isRequired
+        emailVerified: PropTypes.bool.isRequired,
       }),
-      token: PropTypes.string
-    }).isRequired
+      token: PropTypes.string,
+    }).isRequired,
   };
 
   WithAuthUserComp.defaultProps = {};

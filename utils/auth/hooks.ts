@@ -22,7 +22,7 @@ export const useFirebaseAuth = () => {
     const user = firebase.auth().currentUser;
     return {
       initializing: !user,
-      user
+      user,
     };
   });
 

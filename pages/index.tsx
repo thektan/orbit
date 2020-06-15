@@ -56,14 +56,14 @@ Index.propTypes = {
     AuthUser: PropTypes.shape({
       id: PropTypes.string.isRequired,
       email: PropTypes.string.isRequired,
-      emailVerified: PropTypes.bool.isRequired
+      emailVerified: PropTypes.bool.isRequired,
     }),
-    token: PropTypes.string
-  })
+    token: PropTypes.string,
+  }),
 };
 
 Index.defaultProps = {
-  AuthUserInfo: null
+  AuthUserInfo: null,
 };
 
 export default withAuthUser(withAuthUserInfo(Index));

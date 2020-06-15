@@ -23,7 +23,7 @@ export const createAuthUser = (firebaseUser: firebase.User | null) => {
       : get(firebaseUser, "email_verified"), // admin SDK
     displayName: has(firebaseUser, "displayName")
       ? get(firebaseUser, "displayName") // client SDK
-      : get(firebaseUser, "display_name") // admin SDK
+      : get(firebaseUser, "display_name"), // admin SDK
   };
 };
 
@@ -37,9 +37,12 @@ export const createAuthUser = (firebaseUser: firebase.User | null) => {
  *   `createAuthUser` above).
  * @return {String} AuthUser.token - The user's encoded Firebase token.
  */
-export const createAuthUserInfo = ({ firebaseUser = null, token = null } = {}) => {
+export const createAuthUserInfo = ({
+  firebaseUser = null,
+  token = null,
+} = {}) => {
   return {
     AuthUser: createAuthUser(firebaseUser),
-    token
+    token,
   };
 };

@@ -17,7 +17,7 @@ type Inputs = {
 function Login() {
   const initial: Inputs = {
     email: "",
-    password: ""
+    password: "",
   };
   var firstInput: HTMLInputElement | null = null;
 
@@ -26,7 +26,9 @@ function Login() {
   const handleSubmit = async (e: ChangeEvent<any>) => {
     e.preventDefault();
     try {
-      await firebase.auth().signInWithEmailAndPassword(inputs.email, inputs.password);
+      await firebase
+        .auth()
+        .signInWithEmailAndPassword(inputs.email, inputs.password);
       Router.push("/");
     } catch (error) {
       alert(error);
@@ -37,7 +39,7 @@ function Login() {
     e.persist();
     setInputs({
       ...inputs,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -56,7 +58,7 @@ function Login() {
             name="email"
             onChange={handleInputChange}
             value={inputs.email}
-            ref={r => (firstInput = r)}
+            ref={(r) => (firstInput = r)}
           />
         </p>
         <p>

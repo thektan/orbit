@@ -23,7 +23,7 @@ const AccountUpdateName = (props: any) => {
       var user = firebase.auth().currentUser;
       if (user) {
         await user.updateProfile({
-          displayName: input?.value || ""
+          displayName: input?.value || "",
         });
         authUser = user;
       }
@@ -56,7 +56,7 @@ const AccountUpdateName = (props: any) => {
               type="text"
               id="displayName"
               name="displayName"
-              ref={r => (input = r)}
+              ref={(r) => (input = r)}
               defaultValue=""
             />
           </p>
