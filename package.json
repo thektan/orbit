@@ -8,10 +8,14 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@chakra-ui/core": "^1.0.0-next.1",
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
     "@zeit/next-css": "^1.0.1",
     "D": "^1.0.0",
     "cookie-session": "1.4.0",
     "dotenv": "8.2.0",
+    "emotion-theming": "^10.0.27",
     "firebase": "^7.14.4",
     "firebase-admin": "^8.12.1",
     "firestore-pagination-hook": "^1.0.0",
