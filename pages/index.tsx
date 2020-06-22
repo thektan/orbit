@@ -8,12 +8,16 @@ import withAuthUserInfo from "../utils/pageWrappers/withAuthUserInfo";
 import Header from "../components/header";
 import Footer from "../components/footer";
 
+import { ThemeProvider, CSSReset } from "@chakra-ui/core";
+
 const Index = (props: any) => {
   const { AuthUserInfo } = props;
   const authUser = get(AuthUserInfo, "AuthUser");
 
   return (
-    <>
+    <ThemeProvider>
+      <CSSReset />
+
       <Header />
       {!authUser ? (
         <>
@@ -47,7 +51,7 @@ const Index = (props: any) => {
       <>
         <Footer />
       </>
-    </>
+    </ThemeProvider>
   );
 };
 
